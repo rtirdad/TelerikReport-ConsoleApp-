@@ -1,0 +1,11 @@
+C:\Users\CityGIS\Desktop\C#\TelerikReport\TelerikReport\bin\Debug\TelerikReport.exe.config
+C:\Users\CityGIS\Desktop\C#\TelerikReport\TelerikReport\bin\Debug\TelerikReport.exe
+C:\Users\CityGIS\Desktop\C#\TelerikReport\TelerikReport\bin\Debug\TelerikReport.pdb
+C:\Users\CityGIS\Desktop\C#\TelerikReport\TelerikReport\bin\Debug\Telerik.Reporting.dll
+C:\Users\CityGIS\Desktop\C#\TelerikReport\TelerikReport\bin\Debug\Telerik.Reporting.pdb
+C:\Users\CityGIS\Desktop\C#\TelerikReport\TelerikReport\bin\Debug\Telerik.Reporting.xml
+C:\Users\CityGIS\Desktop\C#\TelerikReport\TelerikReport\obj\Debug\TelerikReport.csproj.AssemblyReference.cache
+C:\Users\CityGIS\Desktop\C#\TelerikReport\TelerikReport\obj\Debug\TelerikReport.csproj.CoreCompileInputs.cache
+C:\Users\CityGIS\Desktop\C#\TelerikReport\TelerikReport\obj\Debug\TelerikReport.csproj.CopyComplete
+C:\Users\CityGIS\Desktop\C#\TelerikReport\TelerikReport\obj\Debug\TelerikReport.exe
+C:\Users\CityGIS\Desktop\C#\TelerikReport\TelerikReport\obj\Debug\TelerikReport.pdb
