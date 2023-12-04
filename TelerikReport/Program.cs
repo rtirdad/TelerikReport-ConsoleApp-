@@ -1,6 +1,6 @@
-﻿
-using System;
+﻿using System;
 using System.IO;
+using System.Collections.Generic;
 using Telerik.Reporting;
 using Telerik.Reporting.Processing;
 using Newtonsoft.Json;
@@ -12,23 +12,50 @@ namespace TelerikReportingDemo
     {
         static void Main(string[] args)
         {
-    
-            string jsonData = File.ReadAllText("ExampleInfo.json");
-            dynamic jsonObject = JsonConvert.DeserializeObject(jsonData);
+            string jsonData = @"
+            [
+                {
+                    ""name"": ""Ursula Lane"",
+                    ""country"": ""United States"",
+                    ""region"": ""Zachodniopomorskie"",
+                    ""postalZip"": ""6141""
+                },
+                {
+                    ""name"": ""Gail Underwood"",
+                    ""country"": ""Ukraine"",
+                    ""region"": ""Champagne-Ardenne"",
+                    ""postalZip"": ""8472 CK""
+                },
+                {
+                    ""name"": ""Teegan Berg"",
+                    ""country"": ""Vietnam"",
+                    ""region"": ""Gangwon"",
+                    ""postalZip"": ""13732""
+                },
+                {
+                    ""name"": ""Arsenio Ewing"",
+                    ""country"": ""United States"",
+                    ""region"": ""Guanacaste"",
+                    ""postalZip"": ""41623""
+                },
+                {
+                    ""name"": ""Angelica Salinas"",
+                    ""country"": ""France"",
+                    ""region"": ""Lambayeque"",
+                    ""postalZip"": ""5148""
+                }
+            ]";
 
-            Report1 report = new Report1(); 
+            var data = JsonConvert.DeserializeObject<List<dynamic>>(jsonData);
 
-            report.ReportParameters["ParameterName"].Value = jsonObject.name;
+            Report1 report = new Report1();
 
+            // Assigning the entire deserialized JSON data list to the report's data source
+            report.DataSource = data;
 
             var reportProcessor = new ReportProcessor();
-
             var reportSource = new Telerik.Reporting.InstanceReportSource();
             reportSource.ReportDocument = report;
-
-
-            object parameterValue = "Some Parameter Value";
-            reportSource.Parameters.Add("ParameterName", parameterValue);
 
             RenderingResult result = reportProcessor.RenderReport("PDF", reportSource, null);
 
