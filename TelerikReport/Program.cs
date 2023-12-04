@@ -59,6 +59,7 @@ namespace TelerikReportingDemo
 
             if (!result.HasErrors)
             {
+                report.SkipBlankPages = false;
                 string fileName = result.DocumentName + "." + result.Extension;
                 string path = Path.GetTempPath();
                 string filePath = Path.Combine(path, fileName);
@@ -68,11 +69,11 @@ namespace TelerikReportingDemo
                     fs.Write(result.DocumentBytes, 0, result.DocumentBytes.Length);
                 }
 
-                Console.WriteLine("PDF generated successfully at: " + filePath);
+                Console.WriteLine("PDF generated successfully");
             }
             else
             {
-                Console.WriteLine("Error occurred while generating the PDF.");
+                Console.WriteLine("An Error Occured");
             }
         }
     }
