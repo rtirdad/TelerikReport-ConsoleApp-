@@ -1,9 +1,9 @@
 ﻿using System;
 using System.IO;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 using Telerik.Reporting;
 using Telerik.Reporting.Processing;
-using Newtonsoft.Json;
 using TelerikReport;
 
 namespace TelerikReportingDemo
@@ -12,6 +12,7 @@ namespace TelerikReportingDemo
     {
         static void Main(string[] args)
         {
+            // Your JSON input
             string jsonData = @"
             [
                 {
@@ -46,34 +47,50 @@ namespace TelerikReportingDemo
                 }
             ]";
 
+            // Deserialize JSON to a list of dynamic objects
             var data = JsonConvert.DeserializeObject<List<dynamic>>(jsonData);
 
+            // Create a new report instance
             Report1 report = new Report1();
+
+            // Set the report data source
             report.DataSource = data;
 
+            // Create a ReportProcessor instance
             var reportProcessor = new ReportProcessor();
+
+            // Create an InstanceReportSource and assign the report to it
             var reportSource = new Telerik.Reporting.InstanceReportSource();
             reportSource.ReportDocument = report;
 
+            // Render the report to a PDF
             RenderingResult result = reportProcessor.RenderReport("PDF", reportSource, null);
 
+            // Check if rendering was successful
             if (!result.HasErrors)
             {
-                report.SkipBlankPages = false;
-                string fileName = result.DocumentName + "." + result.Extension;
-                string path = Path.GetTempPath();
-                string filePath = Path.Combine(path, fileName);
+                // Specify the file name
+                string fileName = "GeneratedReport.pdf";
 
+                // Set the file path where you want to save the PDF
+                string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), fileName);
+
+                // Write the PDF content to disk
                 using (FileStream fs = new FileStream(filePath, FileMode.Create))
                 {
                     fs.Write(result.DocumentBytes, 0, result.DocumentBytes.Length);
                 }
 
-                Console.WriteLine("PDF generated successfully");
+                Console.WriteLine("PDF generated successfully. File saved to: " + filePath);
             }
             else
             {
-                Console.WriteLine("An Error Occured");
+                // Output specific errors, if any
+                foreach (var error in result.Errors)
+                {
+                    Console.WriteLine("Error: " + error.Message);
+                }
+                Console.WriteLine("An Error Occurred while generating the PDF.");
             }
         }
     }
