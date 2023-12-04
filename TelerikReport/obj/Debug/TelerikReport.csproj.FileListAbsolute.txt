@@ -137,3 +137,5 @@ C:\Users\CityGIS\Desktop\C#\TelerikReport\TelerikReport\bin\Debug\System.Text.En
 C:\Users\CityGIS\Desktop\C#\TelerikReport\TelerikReport\bin\Debug\System.Text.Json.xml
 C:\Users\CityGIS\Desktop\C#\TelerikReport\TelerikReport\bin\Debug\System.Threading.Tasks.Extensions.xml
 C:\Users\CityGIS\Desktop\C#\TelerikReport\TelerikReport\bin\Debug\System.ValueTuple.xml
+C:\Users\CityGIS\Desktop\C#\TelerikReport\TelerikReport\obj\Debug\TelerikReport.Report1.resources
+C:\Users\CityGIS\Desktop\C#\TelerikReport\TelerikReport\obj\Debug\TelerikReport.csproj.GenerateResource.cache

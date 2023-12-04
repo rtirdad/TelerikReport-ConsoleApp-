@@ -49,8 +49,6 @@ namespace TelerikReportingDemo
             var data = JsonConvert.DeserializeObject<List<dynamic>>(jsonData);
 
             Report1 report = new Report1();
-
-            // Assigning the entire deserialized JSON data list to the report's data source
             report.DataSource = data;
 
             var reportProcessor = new ReportProcessor();
