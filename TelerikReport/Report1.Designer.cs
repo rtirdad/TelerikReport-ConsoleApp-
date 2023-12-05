@@ -22,7 +22,7 @@ namespace TelerikReport
             // 
             // detail
             // 
-            this.detail.Height = Telerik.Reporting.Drawing.Unit.Inch(2D);
+            this.detail.Height = Telerik.Reporting.Drawing.Unit.Inch(1.8D);
             this.detail.Name = "detail";
             // 
             // pageFooterSection1
@@ -52,8 +52,8 @@ namespace TelerikReport
         }
         #endregion
 
-        private Telerik.Reporting.PageHeaderSection pageHeaderSection1;
-        private Telerik.Reporting.DetailSection detail;
-        private Telerik.Reporting.PageFooterSection pageFooterSection1;
+        public Telerik.Reporting.PageHeaderSection pageHeaderSection1;
+        public Telerik.Reporting.DetailSection detail;
+        public Telerik.Reporting.PageFooterSection pageFooterSection1;
     }
 }
