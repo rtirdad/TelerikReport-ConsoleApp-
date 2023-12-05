@@ -49,22 +49,22 @@ namespace TelerikReportingDemo
             report.SkipBlankPages = false;
 
             Telerik.Reporting.PageHeaderSection Header1 = new PageHeaderSection();
+            report.Items.Add(Header1);
 
             var headerTextBox = new Telerik.Reporting.TextBox();
-            headerTextBox.Value = "=Fields.company.employees[0].name";
+            headerTextBox.Value = "=Fields.company.employees[1].name";
             headerTextBox.Left = Telerik.Reporting.Drawing.Unit.Inch(0);
             headerTextBox.Top = Telerik.Reporting.Drawing.Unit.Inch(0);
             headerTextBox.Width = Telerik.Reporting.Drawing.Unit.Inch(2);
             headerTextBox.Height = Telerik.Reporting.Drawing.Unit.Inch(0.2);
-            Header1.Items.Add(headerTextBox);
-            //report.Items.Add(Header1);
-
-            Telerik.Reporting.DetailSection Detail1 = new Telerik.Reporting.DetailSection();
+            //Header1.Items.AddRange(new Telerik.Reporting.ReportItemBase[] { headerTextBox });
+            //Header1.Items.Add(headerTextBox);
+            //report.Items.Add(Header1 );
+            Telerik.Reporting.DetailSection detailSection1 = new Telerik.Reporting.DetailSection();
 
             Telerik.Reporting.PageFooterSection footer = new PageFooterSection();
 
 
-            
             var reportProcessor = new ReportProcessor();
 
             var reportSource = new Telerik.Reporting.InstanceReportSource();
@@ -74,7 +74,7 @@ namespace TelerikReportingDemo
 
             if (!result.HasErrors)
             {
-                string fileName = "Report.pdf";
+                string fileName = "Report2.pdf";
                 string path = "C:\\Users\\CityGIS\\Desktop\\C#\\TelerikReport\\SavedPFD";
                 string filePath = Path.Combine(path, fileName);
 
@@ -96,3 +96,33 @@ namespace TelerikReportingDemo
         }
     }
 }
+
+/*var jsonData = @"[
+                {
+                    ""company"": {
+                        ""employees"": [
+                            {
+                                ""name"": ""Ursula Lane"",
+                                ""country"": ""United States"",
+                                ""region"": ""Zachodniopomorskie"",
+                                ""postalZip"": ""6141"",
+                                ""salary"": 3000
+                            },
+                            {
+                                ""name"": ""Teegan Berg"",
+                                ""country"": ""Vietnam"",
+                                ""region"": ""Gangwon"",
+                                ""postalZip"": ""13732"",
+                                ""salary"": 5000
+                            },
+                            {
+                                ""name"": ""Angelica Salinas"",
+                                ""country"": ""France"",
+                                ""region"": ""Lambayeque"",
+                                ""postalZip"": ""5148"",
+                                 ""salary"": 4000
+                            }
+                        ]
+                    }
+                }
+            ]";*/
