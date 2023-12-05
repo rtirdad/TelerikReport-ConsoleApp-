@@ -5,6 +5,8 @@ using Newtonsoft.Json;
 using Telerik.Reporting;
 using Telerik.Reporting.Processing;
 using TelerikReport;
+using System.Security.Cryptography.X509Certificates;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace TelerikReportingDemo
 {
@@ -49,7 +51,7 @@ namespace TelerikReportingDemo
             report.SkipBlankPages = false;
 
             Telerik.Reporting.PageHeaderSection Header1 = new PageHeaderSection();
-            report.Items.Add(Header1);
+            //report.Items.Add(Header1);
 
             var headerTextBox = new Telerik.Reporting.TextBox();
             headerTextBox.Value = "=Fields.company.employees[1].name";
@@ -60,9 +62,31 @@ namespace TelerikReportingDemo
             //Header1.Items.AddRange(new Telerik.Reporting.ReportItemBase[] { headerTextBox });
             //Header1.Items.Add(headerTextBox);
             //report.Items.Add(Header1 );
-            Telerik.Reporting.DetailSection detailSection1 = new Telerik.Reporting.DetailSection();
+
+
+            Telerik.Reporting.DetailSection Detail1 = new Telerik.Reporting.DetailSection();
+            Detail1.Name = "detail1";
+            report.Items.Add((Telerik.Reporting.ReportItemBase)Detail1);
+            report.Items.Add(Detail1);
+            report.Width = Telerik.Reporting.Drawing.Unit.Inch(4);
+            report.Items.Add(Header1);
+            var numberTextBox = new Telerik.Reporting.TextBox();
+
+            numberTextBox.Value = "$.company.employee[?(@.salary=4000)]";
+            numberTextBox.Left = Telerik.Reporting.Drawing.Unit.Inch(0);
+            numberTextBox.Top = Telerik.Reporting.Drawing.Unit.Inch(0);
+            numberTextBox.Width = Telerik.Reporting.Drawing.Unit.Inch(2);
+            numberTextBox.Height = Telerik.Reporting.Drawing.Unit.Inch(0.2);
+            Detail1.Items.Add(numberTextBox); 
+            report.Items.Add(Detail1);
 
             Telerik.Reporting.PageFooterSection footer = new PageFooterSection();
+            var footerTextBox = new Telerik.Reporting.TextBox();
+            footerTextBox.Value = "Footer Details";
+            footer.Name = footerTextBox.Value;
+            //report.Items.Add(footer);
+            
+         
 
 
             var reportProcessor = new ReportProcessor();
@@ -74,7 +98,7 @@ namespace TelerikReportingDemo
 
             if (!result.HasErrors)
             {
-                string fileName = "Report2.pdf";
+                string fileName = "Report5.pdf";
                 string path = "C:\\Users\\CityGIS\\Desktop\\C#\\TelerikReport\\SavedPFD";
                 string filePath = Path.Combine(path, fileName);
 
@@ -92,6 +116,17 @@ namespace TelerikReportingDemo
                     Console.WriteLine("Error: " + error.Message);
                 }
                 Console.WriteLine("An Error Occurred, the file was not saved :(");
+            }
+        }
+
+        private void detail_ItemDataBinding(object sender, EventArgs e)
+        {
+            Telerik.Reporting.Processing.DetailSection section = (sender as Telerik.Reporting.Processing.DetailSection);
+            Telerik.Reporting.Processing.TextBox txt = (Telerik.Reporting.Processing.TextBox)Telerik.Reporting.Processing.ElementTreeHelper.GetChildByName(section, "textBox1");
+            object title = section.DataObject["Title"];
+            if ((string)title == "Developer")
+            {
+                txt.Style.BackgroundColor = System.Drawing.Color.Blue;
             }
         }
     }
