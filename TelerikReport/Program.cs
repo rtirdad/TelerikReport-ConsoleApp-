@@ -44,22 +44,46 @@ namespace TelerikReportingDemo
 
             var data = JsonConvert.DeserializeObject<List<dynamic>>(jsonData);
 
+            // Create a report
+            //Telerik.Reporting.Report report = new Telerik.Reporting.Report();
             Report1 report = new Report1();
-            report.DataSource = data;
             report.SkipBlankPages = false;
 
-            var header = new Telerik.Reporting.PageHeaderSection();
-            header.Name = "header1";
+            // Define the DataSource for the report
+            report.DataSource = data;
 
-            var numberTextBox = new Telerik.Reporting.TextBox();
-            numberTextBox.Value = "=Fields.company.employees[?(@.salary == 4000)].name";
-            numberTextBox.Left = Telerik.Reporting.Drawing.Unit.Inch(0);
-            numberTextBox.Top = Telerik.Reporting.Drawing.Unit.Inch(0);
-            numberTextBox.Width = Telerik.Reporting.Drawing.Unit.Inch(2);
-            numberTextBox.Height = Telerik.Reporting.Drawing.Unit.Inch(0.2);
-            header.Items.Add(numberTextBox);
+            // Create a Report Header section
+            Telerik.Reporting.ReportHeaderSection reportHeader = new Telerik.Reporting.ReportHeaderSection();
+            reportHeader.Name = "ReportHeaderSection";
 
-            //report.Items.Add(header); // Adding detail section to the report
+            // Create a TextBox in the Report Header to display the name "Ursula Lane"
+            var headerTextBox = new Telerik.Reporting.TextBox();
+            //headerTextBox.Value = "Ursula Lane";
+            headerTextBox.Value = "=Fields.company.employees[?(@.salary == 4000)].name";
+            headerTextBox.Left = Telerik.Reporting.Drawing.Unit.Inch(0);
+            headerTextBox.Top = Telerik.Reporting.Drawing.Unit.Inch(0);
+            headerTextBox.Width = Telerik.Reporting.Drawing.Unit.Inch(2);
+            headerTextBox.Height = Telerik.Reporting.Drawing.Unit.Inch(0.5);
+            reportHeader.Items.Add(headerTextBox);
+
+            // Add the Report Header section to the report
+            report.Items.Add(reportHeader);
+
+            // Create a Detail section for the report
+            Telerik.Reporting.DetailSection detail = new Telerik.Reporting.DetailSection();
+            detail.Name = "DetailSection";
+
+            // Create a TextBox in the Detail section to display employee names
+            var textBox = new Telerik.Reporting.TextBox();
+            textBox.Value = "=Fields.name"; // Displaying employee names
+            textBox.Left = Telerik.Reporting.Drawing.Unit.Inch(0);
+            textBox.Top = Telerik.Reporting.Drawing.Unit.Inch(0.5); // Adjust position below header
+            textBox.Width = Telerik.Reporting.Drawing.Unit.Inch(2);
+            textBox.Height = Telerik.Reporting.Drawing.Unit.Inch(0.2);
+            detail.Items.Add(textBox);
+
+            // Add the Detail section to the report
+            //report.Items.Add(detail);
 
             var reportProcessor = new ReportProcessor();
 
