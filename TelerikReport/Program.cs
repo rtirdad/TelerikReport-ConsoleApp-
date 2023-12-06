@@ -44,46 +44,55 @@ namespace TelerikReportingDemo
 
             var data = JsonConvert.DeserializeObject<List<dynamic>>(jsonData);
 
-            // Create a report
             //Telerik.Reporting.Report report = new Telerik.Reporting.Report();
             Report1 report = new Report1();
             report.SkipBlankPages = false;
 
-            // Define the DataSource for the report
             report.DataSource = data;
 
-            // Create a Report Header section
             Telerik.Reporting.ReportHeaderSection reportHeader = new Telerik.Reporting.ReportHeaderSection();
-            reportHeader.Name = "ReportHeaderSection";
+            //Telerik.Reporting.PageHeaderSection reportHeader = new Telerik.Reporting.PageHeaderSection();
+            //reportHeader.Name = "ReportHeaderSection";
 
-            // Create a TextBox in the Report Header to display the name "Ursula Lane"
             var headerTextBox = new Telerik.Reporting.TextBox();
-            //headerTextBox.Value = "Ursula Lane";
-            headerTextBox.Value = "=Fields.company.employees[?(@.salary == 4000)].name";
-            headerTextBox.Left = Telerik.Reporting.Drawing.Unit.Inch(0);
+            headerTextBox.Value = "Ursula Lane";
+            headerTextBox.Value = "=Fields.company.employees[1].name";
+            //headerTextBox.Value = "=Fields.company.employees[?(@.salary == 4000)].name";
+            headerTextBox.Left = Telerik.Reporting.Drawing.Unit.Inch(4);
             headerTextBox.Top = Telerik.Reporting.Drawing.Unit.Inch(0);
             headerTextBox.Width = Telerik.Reporting.Drawing.Unit.Inch(2);
             headerTextBox.Height = Telerik.Reporting.Drawing.Unit.Inch(0.5);
             reportHeader.Items.Add(headerTextBox);
 
-            // Add the Report Header section to the report
             report.Items.Add(reportHeader);
 
-            // Create a Detail section for the report
+            //Telerik.Reporting.DetailSection detail = new Telerik.Reporting.DetailSection();
             Telerik.Reporting.DetailSection detail = new Telerik.Reporting.DetailSection();
             detail.Name = "DetailSection";
 
-            // Create a TextBox in the Detail section to display employee names
-            var textBox = new Telerik.Reporting.TextBox();
-            textBox.Value = "=Fields.name"; // Displaying employee names
-            textBox.Left = Telerik.Reporting.Drawing.Unit.Inch(0);
-            textBox.Top = Telerik.Reporting.Drawing.Unit.Inch(0.5); // Adjust position below header
-            textBox.Width = Telerik.Reporting.Drawing.Unit.Inch(2);
-            textBox.Height = Telerik.Reporting.Drawing.Unit.Inch(0.2);
-            detail.Items.Add(textBox);
+            var detailTextBox = new Telerik.Reporting.TextBox();
+            detailTextBox.Value = "Detail infos"; 
+            detailTextBox.Left = Telerik.Reporting.Drawing.Unit.Inch(0);
+            detailTextBox.Top = Telerik.Reporting.Drawing.Unit.Inch(0.5); 
+            detailTextBox.Width = Telerik.Reporting.Drawing.Unit.Inch(2);
+            detailTextBox.Height = Telerik.Reporting.Drawing.Unit.Inch(3);
+            detail.Items.Add(detailTextBox);
 
-            // Add the Detail section to the report
-            //report.Items.Add(detail);
+            report.Items.Add(detail);
+
+
+            Telerik.Reporting.ReportFooterSection footer = new Telerik.Reporting.ReportFooterSection();
+            footer.Name = "FooterSection";
+
+            var footerTextBox = new Telerik.Reporting.TextBox();
+            //footerTextBox.Value = "=Fields.company.employees[1].name";
+            footerTextBox.Value = "Test";
+            footerTextBox.Left = Telerik.Reporting.Drawing.Unit.Inch(0);
+            footerTextBox.Top = Telerik.Reporting.Drawing.Unit.Inch(0.5);
+            footerTextBox.Width = Telerik.Reporting.Drawing.Unit.Inch(2);
+            footerTextBox.Height = Telerik.Reporting.Drawing.Unit.Inch(3);
+            detail.Items.Add(footerTextBox);
+
 
             var reportProcessor = new ReportProcessor();
 
@@ -94,8 +103,8 @@ namespace TelerikReportingDemo
 
             if (!result.HasErrors)
             {
-                string fileName = "Report5.pdf";
-                string path = "C:\\Users\\31616\\Desktop\\c#\\TelerikReport-ConsoleApp-\\SavedPFD";
+                string fileName = "Report2.pdf";
+                string path = "C:\\Users\\CityGIS\\Desktop\\C#\\TelerikReport\\SavedPDF";
                 string filePath = Path.Combine(path, fileName);
 
                 using (FileStream fs = new FileStream(filePath, FileMode.Create))
@@ -103,7 +112,7 @@ namespace TelerikReportingDemo
                     fs.Write(result.DocumentBytes, 0, result.DocumentBytes.Length);
                 }
 
-                Console.WriteLine("PDF has been successfully saved.");
+                Console.WriteLine("PDF has successfully saved :)");
             }
             else
             {
@@ -111,7 +120,7 @@ namespace TelerikReportingDemo
                 {
                     Console.WriteLine("Error: " + error.Message);
                 }
-                Console.WriteLine("An error occurred. The file was not saved.");
+                Console.WriteLine("An Error Occurred, the file was not saved :(");
             }
         }
     }
