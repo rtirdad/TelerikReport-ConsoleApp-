@@ -22,12 +22,12 @@ namespace TelerikReport
             // 
             // detail
             // 
-            this.detail.Height = Telerik.Reporting.Drawing.Unit.Inch(1.8D);
+            this.detail.Height = Telerik.Reporting.Drawing.Unit.Inch(1.623D);
             this.detail.Name = "detail";
             // 
             // pageFooterSection1
             // 
-            this.pageFooterSection1.Height = Telerik.Reporting.Drawing.Unit.Inch(1D);
+            this.pageFooterSection1.Height = Telerik.Reporting.Drawing.Unit.Inch(1.073D);
             this.pageFooterSection1.Name = "pageFooterSection1";
             // 
             // Report1

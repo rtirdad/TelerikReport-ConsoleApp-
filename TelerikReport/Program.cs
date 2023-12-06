@@ -5,7 +5,6 @@ using Newtonsoft.Json;
 using Telerik.Reporting;
 using Telerik.Reporting.Processing;
 using TelerikReport;
-using System.Reflection;
 
 namespace TelerikReportingDemo
 {
@@ -64,44 +63,31 @@ namespace TelerikReportingDemo
             report.Items.Add(Header);
 
 
-            Telerik.Reporting.DetailSection detail = new Telerik.Reporting.DetailSection();
 
-            Telerik.Reporting.TextBox detailTextBox = new Telerik.Reporting.TextBox();
+            Telerik.Reporting.DetailSection detail = new Telerik.Reporting.DetailSection();
+            Telerik.Reporting.Panel panel1 = new Telerik.Reporting.Panel();
+            Telerik.Reporting.TextBox detailTextbox = new Telerik.Reporting.TextBox();
+
             var postal = data[0]["company"]["employees"][0]["postalZip"];
             var salary = data[0]["company"]["employees"][0]["salary"];
-            detailTextBox.Value = $"This employee resides in {postal.ToString()}, and their salary is {salary.ToString()}";
-            detailTextBox.Left = Telerik.Reporting.Drawing.Unit.Inch(3);
-            detailTextBox.Top = Telerik.Reporting.Drawing.Unit.Inch(0);
-            detailTextBox.Width = Telerik.Reporting.Drawing.Unit.Inch(2);
-            detailTextBox.Height = Telerik.Reporting.Drawing.Unit.Inch(0);
-            detail.Items.Add(detailTextBox);
+            detailTextbox.Value = $"this employee resides in {postal.ToString()} and their salary is {salary.ToString()}/mo";
+            detailTextbox.Left = Telerik.Reporting.Drawing.Unit.Inch(3);
+            detailTextbox.Top = Telerik.Reporting.Drawing.Unit.Inch(0);
+            detailTextbox.Width = Telerik.Reporting.Drawing.Unit.Inch(2);
+            detailTextbox.Height = Telerik.Reporting.Drawing.Unit.Inch(0);
+            detail.Items.Add(detailTextbox);
+
+            // panel1
+            panel1.Location = new Telerik.Reporting.Drawing.PointU(new Telerik.Reporting.Drawing.Unit(1.0, Telerik.Reporting.Drawing.UnitType.Cm), new Telerik.Reporting.Drawing.Unit(1.0, Telerik.Reporting.Drawing.UnitType.Cm));
+            panel1.Size = new Telerik.Reporting.Drawing.SizeU(new Telerik.Reporting.Drawing.Unit(8.5, Telerik.Reporting.Drawing.UnitType.Cm), new Telerik.Reporting.Drawing.Unit(3.5, Telerik.Reporting.Drawing.UnitType.Cm));
+            panel1.Style.BorderStyle.Default = Telerik.Reporting.Drawing.BorderType.Solid;
+
+            //panel1.Items.AddRange(new Telerik.Reporting.ReportItemBase[] { textBox1 });
+            //detail.Items.AddRange(new Telerik.Reporting.ReportItemBase[] { panel1 });/**/
+            panel1.Items.Add(detailTextbox);
+            detail.Items.Add(panel1);
 
             report.Items.Add(detail);
-
-            /*Telerik.Reporting.DetailSection detail = new Telerik.Reporting.DetailSection();
-            Telerik.Reporting.Panel panel1 = new Telerik.Reporting.Panel();
-            Telerik.Reporting.TextBox detailTextBox = new Telerik.Reporting.TextBox();
-
-            panel1.Left = Telerik.Reporting.Drawing.Unit.Inch(3);
-            panel1.Top = Telerik.Reporting.Drawing.Unit.Inch(0);
-            panel1.Width = Telerik.Reporting.Drawing.Unit.Inch(2);
-            panel1.Height = Telerik.Reporting.Drawing.Unit.Inch(1);
-
-            detailTextBox.Value = "detail info";
-            detailTextBox.Left = Telerik.Reporting.Drawing.Unit.Inch(3);
-            detailTextBox.Top = Telerik.Reporting.Drawing.Unit.Inch(0);
-            detailTextBox.Width = Telerik.Reporting.Drawing.Unit.Inch(0);
-            detailTextBox.Height = Telerik.Reporting.Drawing.Unit.Inch(0);
-
-            panel1.Items.AddRange(new Telerik.Reporting.ReportItemBase[] { detailTextBox });
-            detail.Items.AddRange(new Telerik.Reporting.ReportItemBase[] { panel1 });
-
-            detail.Items.Add(panel1);
-            panel1.Items.Add(detailTextBox);
-
-            detail.Items.Add(panel1);
-
-            report.Items.Add(detail);*/
 
 
             Telerik.Reporting.ReportFooterSection footer = new Telerik.Reporting.ReportFooterSection();
