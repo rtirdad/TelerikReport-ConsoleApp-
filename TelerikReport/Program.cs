@@ -54,7 +54,7 @@ namespace TelerikReportingDemo
             Telerik.Reporting.TextBox headerTextBox = new Telerik.Reporting.TextBox();
 
             var EmployeeName = data[0]["company"]["employees"][0]["name"];
-            headerTextBox.Value = EmployeeName.ToString(); 
+            headerTextBox.Value = EmployeeName.ToString();
             headerTextBox.Left = Telerik.Reporting.Drawing.Unit.Inch(3);
             headerTextBox.Top = Telerik.Reporting.Drawing.Unit.Inch(0);
             headerTextBox.Width = Telerik.Reporting.Drawing.Unit.Inch(2);
@@ -64,20 +64,21 @@ namespace TelerikReportingDemo
             report.Items.Add(Header);
 
 
-            /*Telerik.Reporting.DetailSection detail = new Telerik.Reporting.DetailSection();
+            Telerik.Reporting.DetailSection detail = new Telerik.Reporting.DetailSection();
 
             Telerik.Reporting.TextBox detailTextBox = new Telerik.Reporting.TextBox();
-            detailTextBox.Value = "Detail";
-            //headerTextBox.Value = "=data.company[0].employees[1].name";
+            var postal = data[0]["company"]["employees"][0]["postalZip"];
+            var salary = data[0]["company"]["employees"][0]["salary"];
+            detailTextBox.Value = $"This employee resides in {postal.ToString()}, and their salary is {salary.ToString()}";
             detailTextBox.Left = Telerik.Reporting.Drawing.Unit.Inch(3);
             detailTextBox.Top = Telerik.Reporting.Drawing.Unit.Inch(0);
             detailTextBox.Width = Telerik.Reporting.Drawing.Unit.Inch(2);
             detailTextBox.Height = Telerik.Reporting.Drawing.Unit.Inch(0);
-            detail.Items.Add(headerTextBox);
+            detail.Items.Add(detailTextBox);
 
-            report.Items.Add(Header);*/
+            report.Items.Add(detail);
 
-            Telerik.Reporting.DetailSection detail = new Telerik.Reporting.DetailSection();
+            /*Telerik.Reporting.DetailSection detail = new Telerik.Reporting.DetailSection();
             Telerik.Reporting.Panel panel1 = new Telerik.Reporting.Panel();
             Telerik.Reporting.TextBox detailTextBox = new Telerik.Reporting.TextBox();
 
@@ -85,8 +86,6 @@ namespace TelerikReportingDemo
             panel1.Top = Telerik.Reporting.Drawing.Unit.Inch(0);
             panel1.Width = Telerik.Reporting.Drawing.Unit.Inch(2);
             panel1.Height = Telerik.Reporting.Drawing.Unit.Inch(1);
-
-            //detailTextBox.Value = "=data.company.employees[1].name";
 
             detailTextBox.Value = "detail info";
             detailTextBox.Left = Telerik.Reporting.Drawing.Unit.Inch(3);
@@ -102,7 +101,7 @@ namespace TelerikReportingDemo
 
             detail.Items.Add(panel1);
 
-            report.Items.Add(detail);
+            report.Items.Add(detail);*/
 
 
             Telerik.Reporting.ReportFooterSection footer = new Telerik.Reporting.ReportFooterSection();
@@ -114,11 +113,12 @@ namespace TelerikReportingDemo
             var Country = data[0]["company"]["employees"][0]["country"];
             footerTextBox.Value = $"{Region.ToString()} , {Country.ToString()}";
             footerTextBox.Left = Telerik.Reporting.Drawing.Unit.Inch(3);
-            footerTextBox.Top = Telerik.Reporting.Drawing.Unit.Inch(2);
+            footerTextBox.Top = Telerik.Reporting.Drawing.Unit.Inch(0.5);
             footerTextBox.Width = Telerik.Reporting.Drawing.Unit.Inch(2);
             footerTextBox.Height = Telerik.Reporting.Drawing.Unit.Inch(0);
             footer.Items.Add(footerTextBox);
             report.Items.Add(footer);
+
 
             var reportProcessor = new ReportProcessor();
 
